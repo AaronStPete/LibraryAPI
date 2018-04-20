@@ -9,7 +9,7 @@ namespace LibraryAPI.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public DateTime Born { get; set; }
+        public DateTime? Born { get; set; }
         public DateTime? Died { get; set; }
 
         // an author has many books
