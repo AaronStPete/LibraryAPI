@@ -18,25 +18,32 @@ namespace LibraryAPI.Controllers
         {
             using (var db = new LibraryContext())
             {
-                var query = db.Books.Include("Author").Include("Genre");
+                var query = db.Books.Include(i => i.Author).Include(i => i.Genre);
 
                 if (!String.IsNullOrEmpty(param.Title))
                 {
+                    //search by title
                     query = query.Where(w => w.Title == param.Title);
                 }
-
+                if (!String.IsNullOrEmpty(param.Author))
+                {
+                    //search by author
+                    query = query.Where(w => w.Author.Name == param.Author);
+                }
+                if (!String.IsNullOrEmpty(param.Genre))
+                {
+                    //search by genre
+                    query = query.Where(w => w.Genre.Name == param.Genre);
+                }
                 return query.ToList();
             }
-            // get all books from the database
         }
 
-        //search by title
+        // get all books from the database
+        
 
 
-        //search by author
 
-
-        //search by genre
 
 
     }

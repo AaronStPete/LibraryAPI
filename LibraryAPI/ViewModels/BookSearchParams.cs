@@ -8,11 +8,7 @@ namespace LibraryAPI.ViewModels
     public class BookSearchParams
     {
         public string Title { get; set; }
-        public string YearPublished { get; set; }
-        public string Condition { get; set; }
-        public bool IsCheckedOut { get; set; }
-        public DateTime? ReturnBy { get; set; }
-        public string AuthorName { get; set; }
+        public string Author { get; set; }
         public string Genre { get; set; }
     }
 }
