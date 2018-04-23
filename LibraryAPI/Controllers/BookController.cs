@@ -7,26 +7,37 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Data.Entity;
+using LibraryAPI.ViewModels;
 
 namespace LibraryAPI.Controllers
 {
     public class BookController : ApiController
     {
-        public IEnumerable<Book> GetAll()
+        [HttpGet]
+        public IEnumerable<Book> Search([FromUri]BookSearchParams param)
         {
+            using (var db = new LibraryContext())
+            {
+                var query = db.Books.Include("Author").Include("Genre");
+
+                if (!String.IsNullOrEmpty(param.Title))
+                {
+                    query = query.Where(w => w.Title == param.Title);
+                }
+
+                return query.ToList();
+            }
             // get all books from the database
-            var db = new LibraryContext();
-            return db.Books;
         }
 
         //search by title
-        
+
 
         //search by author
-        
+
 
         //search by genre
-        
+
 
     }
 }
